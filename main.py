@@ -6,16 +6,16 @@ lum_sym = ['.', '*', '^', '~', '!', '&', '$', '%', '#', '@']
 ascii_buf = ""
 
 if len(sys.argv) != 3:
-    print("[-] Usage: python main.py <image file> <resize rate>")
+    print("[-] Usage: python main.py <image file> <downscale rate>")
     exit(1)
 
-resize_rate = float(sys.argv[2])
+downscale_rate = float(sys.argv[2])
 
 img = Image.open(sys.argv[1]).convert("LA") # Open image then convert to grayscale
 img = img.rotate(90)
 WIDTH, HEIGHT = img.size
-WIDTH = int(WIDTH * resize_rate)
-HEIGHT = int(HEIGHT * resize_rate)
+WIDTH = int(WIDTH * downscale_rate)
+HEIGHT = int(HEIGHT * downscale_rate)
 img.thumbnail((WIDTH, HEIGHT), Image.ANTIALIAS) # Resize Image
 pix = img.load() # Image pixels
 
