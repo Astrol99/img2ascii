@@ -11,12 +11,15 @@ if len(sys.argv) != 3:
 
 downscale_rate = float(sys.argv[2])
 
+if downscale_rate > 1.0:
+    raise ValueError("Cannot upscale, valid values are 0.0 - 1.0")
+
 img = Image.open(sys.argv[1]).convert("LA") # Open image then convert to grayscale
 img = img.rotate(90)
 WIDTH, HEIGHT = img.size
 WIDTH = int(WIDTH * downscale_rate)
 HEIGHT = int(HEIGHT * downscale_rate)
-img.thumbnail((WIDTH, HEIGHT), Image.ANTIALIAS) # Resize Image
+img.thumbnail((WIDTH, HEIGHT)) # Resize Image
 pix = img.load() # Image pixels
 
 for x in range(WIDTH):
